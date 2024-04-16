@@ -5,17 +5,10 @@ require __DIR__."/vendor/autoload.php";
 $metodo = $_SERVER['REQUEST_METHOD'];
 $caminho = $_SERVER['PATH_INFO'] ?? '/';
 
+#use Php\Primeiroprojeto\Router
 $r = new Php\Primeiroprojeto\Router($metodo, $caminho);
 
 #ROTAS
-
-$r->get('/olamundo', function (){
-    return "Olá mundo!";
-} );
-
-$r->get('/olapessoa/{nome}', function($params){
-    return 'Olá '.$params[1];
-} );
 
 //Exercício 1
 $r->get('/exercicio1/formulario', function() {
@@ -143,6 +136,17 @@ $r->post('/exercicio6/resposta', function(){
     }
 });
 
+//Exercício 7
+$r->post('/exercicio7/resposta', function(){
+    $number = $_POST['number'];
+    $numberInCentimeters = $number * 100;
+    return "<h2>$numberInCentimeters centímetros.</h2>";
+});
+
+$r->get('/exercicio7/formulario', function(){
+    include("exercicio7.html");
+});
+
 //Exercício 8
 $r->get('/exercicio8/formulario', function(){
     include("exercicio8.html");
@@ -208,6 +212,35 @@ $r->post('/exercicio10/resposta', function(){
     }
 });
 
+//Chamando o formulário para inserir alunos
+$r->get('/aluno/inserir',
+'Php\Primeiroprojeto\Controllers\AlunoController@inserir');
+
+$r->post('/aluno/novo',
+'Php\Primeiroprojeto\Controllers\AlunoController@novo');
+
+//Chamando o formulário para inserir cursos
+$r->get('/curso/inserir',
+'Php\Primeiroprojeto\Controllers\CursoController@inserir');
+
+$r->post('/curso/novo',
+'Php\Primeiroprojeto\Controllers\CursoController@novo');
+
+//Chamando o formulário para inserir professor
+$r->get('/professor/inserir',
+'Php\Primeiroprojeto\Controllers\ProfessorController@inserir');
+
+$r->post('/professor/novo',
+'Php\Primeiroprojeto\Controllers\ProfessorController@novo');
+
+//Chamando o formulário para inserir turma
+$r->get('/turma/inserir',
+'Php\Primeiroprojeto\Controllers\TurmaController@inserir');
+
+$r->post('/turma/novo',
+'Php\Primeiroprojeto\Controllers\TurmaController@novo');
+
+
 #ROTAS
 
 $resultado = $r->handler();
@@ -218,6 +251,11 @@ if(!$resultado){
     die();
 }
 
-echo $resultado($r->getParams());
-
-
+if ($resultado instanceof Closure){
+    echo $resultado($r->getParams());
+} elseif (is_string($resultado)){
+    $resultado = explode("@", $resultado);
+    $controller = new $resultado[0];
+    $resultado = $resultado[1];
+    echo $controller->$resultado($r->getParams());
+}
