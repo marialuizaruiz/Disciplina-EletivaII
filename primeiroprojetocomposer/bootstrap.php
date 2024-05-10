@@ -262,12 +262,30 @@ $r->post('/curso/editar',
 $r->post('/curso/deletar',
     'Php\Primeiroprojeto\Controllers\CursoController@deletar');
 
-//Chamando o formulário para inserir professor
+//Chamando o formulário PROFESSOR
 $r->get('/professor/inserir',
 'Php\Primeiroprojeto\Controllers\ProfessorController@inserir');
 
 $r->post('/professor/novo',
 'Php\Primeiroprojeto\Controllers\ProfessorController@novo');
+
+$r->get('/professor', 
+    'Php\Primeiroprojeto\Controllers\ProfessorController@index');
+
+$r->get('/professor/{acao}/{status}', 
+    'Php\Primeiroprojeto\Controllers\ProfessorController@index');
+
+$r->get('/professor/alterar/id/{id}',
+    'Php\Primeiroprojeto\Controllers\ProfessorController@alterar');
+
+$r->get('/professor/excluir/id/{id}',
+    'Php\Primeiroprojeto\Controllers\ProfessorController@excluir');
+
+$r->post('/professor/editar',
+    'Php\Primeiroprojeto\Controllers\ProfessorController@editar');
+
+$r->post('/professor/deletar',
+    'Php\Primeiroprojeto\Controllers\ProfessorController@deletar');
 
 //Chamando o formulário para inserir turma
 $r->get('/turma/inserir',
