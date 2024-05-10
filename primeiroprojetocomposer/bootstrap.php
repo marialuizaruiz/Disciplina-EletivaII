@@ -212,19 +212,55 @@ $r->post('/exercicio10/resposta', function(){
     }
 });
 
-//Chamando o formulário para inserir alunos
+//Chamando o formulário ALUNOS
 $r->get('/aluno/inserir',
 'Php\Primeiroprojeto\Controllers\AlunoController@inserir');
 
 $r->post('/aluno/novo',
 'Php\Primeiroprojeto\Controllers\AlunoController@novo');
 
-//Chamando o formulário para inserir cursos
+$r->get('/aluno', 
+    'Php\Primeiroprojeto\Controllers\AlunoController@index');
+
+$r->get('/aluno/{acao}/{status}', 
+    'Php\Primeiroprojeto\Controllers\AlunoController@index');
+
+$r->get('/aluno/alterar/id/{id}',
+    'Php\Primeiroprojeto\Controllers\AlunoController@alterar');
+
+$r->get('/aluno/excluir/id/{id}',
+    'Php\Primeiroprojeto\Controllers\AlunoController@excluir');
+
+$r->post('/aluno/editar',
+    'Php\Primeiroprojeto\Controllers\AlunoController@editar');
+
+$r->post('/aluno/deletar',
+    'Php\Primeiroprojeto\Controllers\AlunoController@deletar');
+
+//Chamando o formulário CURSOS
 $r->get('/curso/inserir',
 'Php\Primeiroprojeto\Controllers\CursoController@inserir');
 
 $r->post('/curso/novo',
 'Php\Primeiroprojeto\Controllers\CursoController@novo');
+
+$r->get('/curso', 
+    'Php\Primeiroprojeto\Controllers\CursoController@index');
+
+$r->get('/curso/{acao}/{status}', 
+    'Php\Primeiroprojeto\Controllers\CursoController@index');
+
+$r->get('/curso/alterar/id/{id}',
+    'Php\Primeiroprojeto\Controllers\CursoController@alterar');
+
+$r->get('/curso/excluir/id/{id}',
+    'Php\Primeiroprojeto\Controllers\CursoController@excluir');
+
+$r->post('/curso/editar',
+    'Php\Primeiroprojeto\Controllers\CursoController@editar');
+
+$r->post('/curso/deletar',
+    'Php\Primeiroprojeto\Controllers\CursoController@deletar');
 
 //Chamando o formulário para inserir professor
 $r->get('/professor/inserir',
@@ -239,7 +275,6 @@ $r->get('/turma/inserir',
 
 $r->post('/turma/novo',
 'Php\Primeiroprojeto\Controllers\TurmaController@novo');
-
 
 #ROTAS
 
