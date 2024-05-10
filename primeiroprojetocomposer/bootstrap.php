@@ -287,12 +287,30 @@ $r->post('/professor/editar',
 $r->post('/professor/deletar',
     'Php\Primeiroprojeto\Controllers\ProfessorController@deletar');
 
-//Chamando o formulário para inserir turma
+//Chamando o formulário TURMA
 $r->get('/turma/inserir',
 'Php\Primeiroprojeto\Controllers\TurmaController@inserir');
 
 $r->post('/turma/novo',
 'Php\Primeiroprojeto\Controllers\TurmaController@novo');
+
+$r->get('/turma', 
+    'Php\Primeiroprojeto\Controllers\TurmaController@index');
+
+$r->get('/turma/{acao}/{status}', 
+    'Php\Primeiroprojeto\Controllers\TurmaController@index');
+
+$r->get('/turma/alterar/id/{id}',
+    'Php\Primeiroprojeto\Controllers\TurmaController@alterar');
+
+$r->get('/turma/excluir/id/{id}',
+    'Php\Primeiroprojeto\Controllers\TurmaController@excluir');
+
+$r->post('/turma/editar',
+    'Php\Primeiroprojeto\Controllers\TurmaController@editar');
+
+$r->post('/turma/deletar',
+    'Php\Primeiroprojeto\Controllers\TurmaController@deletar');
 
 #ROTAS
 
