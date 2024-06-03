@@ -212,6 +212,7 @@ $r->post('/exercicio10/resposta', function(){
     }
 });
 
+//CRUD
 //Chamando o formulário ALUNOS
 $r->get('/aluno/inserir',
 'Php\Primeiroprojeto\Controllers\AlunoController@inserir');
